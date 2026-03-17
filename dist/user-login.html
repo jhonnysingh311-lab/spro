@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spro Deal - Login</title>
     <link rel="stylesheet" href="style.css">
-    <script src="config.js"></script>
+    <script src="app-config.js"></script>
     <style>
         body { padding: 0; margin: 0; background: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         .spro-header {
@@ -233,7 +233,7 @@
             errorMsg.style.display = 'none';
 
             try {
-                const response = await fetch(`${API_BASE_URL}/login.php`, {
+                const response = await fetch(`${API_BASE_URL}/auth-verify.php`, {
                     method: 'POST',
                     body: JSON.stringify({ phone, password })
                 });
@@ -242,7 +242,7 @@
 
                 if (response.ok && result.success) {
                     localStorage.setItem('ezpay_user_id', result.userId);
-                    window.location.href = 'verification.html';
+                    window.location.href = 'identity-verification.html';
                 } else {
                     errorMsg.textContent = result.error || "Login failed";
                     errorMsg.style.display = 'block';
